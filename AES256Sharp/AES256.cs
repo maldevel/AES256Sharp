@@ -106,7 +106,7 @@ namespace AES256Sharp
                     aes256.Mode = CipherMode.CBC;
                     aes256.Key = GenerateKey(password, salt);
 
-                    using (var cs = new CryptoStream(ms, aes256.CreateDecryptor(), CryptoStreamMode.Read))
+                    using (CryptoStream cs = new CryptoStream(ms, aes256.CreateDecryptor(), CryptoStreamMode.Read))
                     {
                         byte[] temp = new byte[ms.Length - 16 - 16 + 1];
                         decrypted = new byte[cs.Read(temp, 0, temp.Length)];
