@@ -44,8 +44,6 @@ namespace AES256Sharp
         public static string Encrypt(string plain, string password)
         {
             if (plain == null || plain.Length == 0) return null;
-
-            byte[] encrypted;
             byte[] data = Encoding.UTF8.GetBytes(plain);
 
             string saltKeyStr = GenerateSaltKey(password);
@@ -77,10 +75,8 @@ namespace AES256Sharp
                     }
                 }
 
-                encrypted = ms.ToArray();
+                return Convert.ToBase64String(ms.ToArray());
             }
-
-            return Convert.ToBase64String(encrypted);
         }
 
         public static string Decrypt(string cipher, string password)
